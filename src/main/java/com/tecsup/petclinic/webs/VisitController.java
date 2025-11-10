@@ -2,7 +2,6 @@ package com.tecsup.petclinic.webs;
 
 import com.tecsup.petclinic.entities.Visit;
 import com.tecsup.petclinic.services.VisitService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,36 +11,31 @@ import java.util.List;
 @RequestMapping("/api/visits")
 public class VisitController {
 
-    @Autowired
-    private VisitService visitService;
+    private final VisitService visitService;
+
+    public VisitController(VisitService visitService) {
+        this.visitService = visitService;
+    }
 
     @PostMapping
     public ResponseEntity<Visit> create(@RequestBody Visit visit) {
-        Visit newVisit = visitService.create(visit);
-        return ResponseEntity.ok(newVisit);
+        return ResponseEntity.status(201).body(visitService.create(visit));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Visit> findById(@PathVariable Integer id) {
-        Visit visit = visitService.findById(id);
-        if (visit == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(visit);
+        Visit result = visitService.findById(id);
+        return result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<Visit>> findAll() {
-        return ResponseEntity.ok(visitService.findAll());
+    public List<Visit> findAll() {
+        return visitService.findAll();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Visit> update(@PathVariable Integer id, @RequestBody Visit visit) {
-        Visit updated = visitService.update(id, visit);
-        if (updated == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(updated);
+        return ResponseEntity.ok(visitService.update(id, visit));
     }
 
     @DeleteMapping("/{id}")
