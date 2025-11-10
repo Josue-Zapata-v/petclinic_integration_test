@@ -48,7 +48,6 @@ public class TObjectCreatorOwner {
     public static List<Owner> getAllOwners() {
         Owner owner1 = getOwner(); // George Franklin
 
-        // CORRECCIÓN: Usar setters en lugar del constructor con 6 argumentos.
         Owner owner2 = new Owner();
         owner2.setId(2L);
         owner2.setFirstName("Betty");
@@ -89,7 +88,6 @@ public class TObjectCreatorOwner {
     public static List<OwnerDTO> getAllOwnerDTOs() {
         OwnerDTO dto1 = getOwnerDTO();
 
-        // CORRECCIÓN: Usar setters en lugar del constructor con 6 argumentos.
         OwnerDTO dto2 = new OwnerDTO();
         dto2.setId(2L);
         dto2.setFirstName("Betty");
