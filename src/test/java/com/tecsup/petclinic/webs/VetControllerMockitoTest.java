@@ -10,7 +10,7 @@ import com.tecsup.petclinic.util.TObjectCreator;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest; // ¡CORRECCIÓN CLAVE!
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest; 
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -27,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Pruebas unitarias para VetController usando Mockito para simular VetService.
  */
-// **CAMBIO A @WebMvcTest(VetController.class):** Solo carga la capa web y el controlador.
 @WebMvcTest(VetController.class) 
 public class VetControllerMockitoTest {
 
@@ -37,12 +36,9 @@ public class VetControllerMockitoTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean // Simula el servicio
+    @MockBean 
     private VetService vetService;
     
-    // **CAMBIO:** El Mapper ahora también se simula.
-    // Esto es necesario porque @WebMvcTest no carga la aplicación completa
-    // para autoconfigurar MapStruct.
     @MockBean
     private VetMapper mapper;
 
@@ -108,9 +104,9 @@ public class VetControllerMockitoTest {
 
     @Test
     public void testCreateVet() throws Exception {
-        VetDTO newVetDTO = TObjectCreator.newVetDTO(); // DTO de entrada: Antonio Banderas
-        Vet mockVet = TObjectCreator.newVet(); // Entidad de entrada: Antonio Banderas
-        Vet createdVet = TObjectCreator.newVetCreated(); // Entidad de salida (con ID 3000): Antonio Banderas
+        VetDTO newVetDTO = TObjectCreator.newVetDTO(); 
+        Vet mockVet = TObjectCreator.newVet(); 
+        Vet createdVet = TObjectCreator.newVetCreated(); 
     
         // **CORRECCIÓN AQUÍ:** Usamos el DTO de entrada para construir el DTO de salida
         // y le asignamos el ID simulado.
@@ -128,7 +124,7 @@ public class VetControllerMockitoTest {
     
         // 3. Simular Mapeo de salida: Entidad creada -> DTO de respuesta
         Mockito.when(mapper.mapToDto(createdVet))
-            .thenReturn(createdVetDTO); // <--- Ahora devuelve "Antonio" con ID 3000
+            .thenReturn(createdVetDTO); 
 
 
         mockMvc.perform(post(BASE_URL)
@@ -138,7 +134,7 @@ public class VetControllerMockitoTest {
                 .andExpect(status().isCreated())
                 // La aserción ahora espera el nombre de Antonio
                 .andExpect(jsonPath("$.id", is(createdVet.getId())))
-                .andExpect(jsonPath("$.firstName", is(createdVet.getFirstName()))); // Espera "Antonio"
+                .andExpect(jsonPath("$.firstName", is(createdVet.getFirstName()))); 
     }   
 
     // --- ELIMINACIÓN ---

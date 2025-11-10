@@ -17,7 +17,6 @@ public class VetDTO {
     private Integer id;
     private String firstName;
     private String lastName;
-    // Se agregan campos del schema.sql para tener un DTO completo para CRUD
     private String email; 
     private String phone; 
     private Boolean active; 

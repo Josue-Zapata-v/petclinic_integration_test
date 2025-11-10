@@ -11,6 +11,4 @@ import com.tecsup.petclinic.entities.Vet;
 @Repository
 public interface VetRepository extends JpaRepository<Vet, Integer> {
     
-    // Método de ejemplo para búsqueda por nombre, si se necesitara
-    // List<Vet> findByLastName(String lastName);
 }

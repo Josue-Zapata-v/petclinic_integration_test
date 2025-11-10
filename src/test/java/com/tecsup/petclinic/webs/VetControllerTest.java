@@ -57,7 +57,7 @@ public class VetControllerTest {
 		this.mockMvc.perform(get(BASE_URL))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$", hasSize(NRO_RECORD))) // Verifica el tamaño total
+				.andExpect(jsonPath("$", hasSize(NRO_RECORD))) 
 				.andExpect(jsonPath("$[0].id", is(ID_FIRST_RECORD)));
 	}
 
@@ -109,14 +109,13 @@ public class VetControllerTest {
 				.active(true)
 				.build();
         
-        // La prueba no puede predecir el ID, solo verifica que sea un 201 y los datos enviados.
 
 		this.mockMvc.perform(post(BASE_URL)
 						.content(om.writeValueAsString(newVetTO))
 						.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
 				.andDo(print())
 				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.id").exists()) // Verifica que el ID fue generado
+				.andExpect(jsonPath("$.id").exists()) 
 				.andExpect(jsonPath("$.firstName", is(FIRST_NAME)))
 				.andExpect(jsonPath("$.lastName", is(LAST_NAME)));
 	}
@@ -206,7 +205,6 @@ public class VetControllerTest {
 	 */
 	@Test
 	public void testDeleteVetKO() throws Exception {
-		// Asumimos que el ID 1000 no existe
 		mockMvc.perform(delete(BASE_URL + "/" + "1000" ))
 				.andExpect(status().isNotFound());
 	}

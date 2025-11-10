@@ -82,7 +82,6 @@ public class VetController {
     public ResponseEntity<VetDTO> update(@PathVariable Integer id, @RequestBody VetDTO vetDTO) {
         VetDTO updatedVetDTO;
         try {
-             // Es importante setear el ID al DTO/Entity antes de actualizar
             vetDTO.setId(id);
             Vet updatedVet = vetService.update(mapper.mapToEntity(vetDTO));
             updatedVetDTO = mapper.mapToDto(updatedVet);

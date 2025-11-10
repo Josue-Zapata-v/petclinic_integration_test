@@ -142,9 +142,6 @@ public class TObjectCreator {
                 .build();
     }
     
-    /**
-     * CORRECCIÓN: Se usa el constructor sin argumentos y setters.
-     */
     public static List<Vet> getAllVets() {
         List<Vet> vets = new ArrayList<>();
         

@@ -29,7 +29,6 @@ public class Vet {
     @Column(name = "last_name")
     private String lastName;
     
-    // **CAMPOS NUEVOS REQUERIDOS POR LA PRUEBA Y SCHEMA.SQL**
     @Column(name = "email")
     private String email; 
     
@@ -37,8 +36,8 @@ public class Vet {
     private String phone;
     
     @Column(name = "active")
-    private Boolean active; // Este campo es crucial para el error que estamos corrigiendo
-    // **FIN DE CAMPOS NUEVOS**
+    private Boolean active; 
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

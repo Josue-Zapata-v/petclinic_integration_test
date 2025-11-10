@@ -36,12 +36,9 @@ public class VetServiceImpl implements VetService {
     public Vet update(Vet newVet) throws VetNotFoundException {
         Vet currentVet = findById(newVet.getId());
         
-        // Actualiza solo los campos principales para simplificar
         currentVet.setFirstName(newVet.getFirstName());
         currentVet.setLastName(newVet.getLastName());
-        
-        // Si la entidad Vet tuviera más campos (email, phone, active) se actualizarían aquí.
-        
+                
         return vetRepository.save(currentVet);
     }
 

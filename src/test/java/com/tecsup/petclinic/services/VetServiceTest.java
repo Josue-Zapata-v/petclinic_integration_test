@@ -29,7 +29,7 @@ public class VetServiceTest {
     // --- CREATE ---
 
     @Test
-    @Transactional // Para asegurar la limpieza de la DB después del test
+    @Transactional 
     void testCreateVet() {
         Vet newVet = TObjectCreator.newVet();
         Vet createdVet = vetService.create(newVet);
