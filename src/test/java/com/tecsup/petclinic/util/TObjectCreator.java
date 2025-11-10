@@ -90,17 +90,14 @@ public class TObjectCreator {
     // --- NUEVOS MÉTODOS PARA VET ---
     // -------------------------------------
 
-    // Datos base (James Carter - ID 1) basado en data.sql
-    public static Vet getVet() {
+   public static Vet getVet() {
         Vet vet = new Vet();
         vet.setId(1);
         vet.setFirstName("James");
         vet.setLastName("Carter");
-        // No se incluyen especialidades aquí para simplificar
         return vet;
     }
 
-    // Nuevo Vet sin ID (para crear)
     public static Vet newVet() {
         Vet vet = new Vet();
         vet.setFirstName("Antonio");
@@ -108,14 +105,12 @@ public class TObjectCreator {
         return vet;
     }
 
-    // Nuevo Vet creado con ID simulado (para pruebas de Service)
     public static Vet newVetCreated() {
         Vet vet = newVet();
         vet.setId(3000);
         return vet;
     }
 
-    // DTO base (James Carter - ID 1) con campos completos
     public static VetDTO getVetDTO() {
         return VetDTO.builder()
                 .id(1)
@@ -127,7 +122,6 @@ public class TObjectCreator {
                 .build();
     }
 
-    // Nuevo DTO sin ID (para crear)
     public static VetDTO newVetDTO() {
         return VetDTO.builder()
                 .id(null)
@@ -139,7 +133,6 @@ public class TObjectCreator {
                 .build();
     }
 
-    // DTO para la eliminación con un ID simulado
     public static VetDTO newVetDTOForDelete() {
         return VetDTO.builder()
                 .id(5000)
@@ -149,23 +142,31 @@ public class TObjectCreator {
                 .build();
     }
     
-    // Lista de Vets (para findAll, basado en data.sql, solo los primeros 5 activos)
+    /**
+     * CORRECCIÓN: Se usa el constructor sin argumentos y setters.
+     */
     public static List<Vet> getAllVets() {
         List<Vet> vets = new ArrayList<>();
-        vets.add(new Vet(1, "James", "Carter", null));
-        vets.add(new Vet(2, "Helen", "Leary", null));
-        vets.add(new Vet(3, "Linda", "Douglas", null));
-        vets.add(new Vet(4, "Rafael", "Ortega", null));
-        vets.add(new Vet(5, "Henry", "Stevens", null));
+        
+        Vet v1 = new Vet(); v1.setId(1); v1.setFirstName("James"); v1.setLastName("Carter");
+        Vet v2 = new Vet(); v2.setId(2); v2.setFirstName("Helen"); v2.setLastName("Leary");
+        Vet v3 = new Vet(); v3.setId(3); v3.setFirstName("Linda"); v3.setLastName("Douglas");
+        Vet v4 = new Vet(); v4.setId(4); v4.setFirstName("Rafael"); v4.setLastName("Ortega");
+        Vet v5 = new Vet(); v5.setId(5); v5.setFirstName("Henry"); v5.setLastName("Stevens");
+        
+        vets.add(v1);
+        vets.add(v2);
+        vets.add(v3);
+        vets.add(v4);
+        vets.add(v5);
+        
         return vets;
     }
 
-    // Lista de VetDTOs (para pruebas de Mockito)
     public static List<VetDTO> getAllVetDTOs() {
         List<VetDTO> vetDTOs = new ArrayList<>();
         vetDTOs.add(getVetDTO());
         vetDTOs.add(VetDTO.builder().id(2).firstName("Helen").lastName("Leary").build());
         return vetDTOs;
     }
-
 }
